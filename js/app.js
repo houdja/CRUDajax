@@ -1,6 +1,8 @@
 const showForm = document.querySelector('.show__add__form');
 const addUserForm = document.querySelector('.div__form');
-const table = document.querySelector('.table');
+const table = document.querySelector('.table .user_info');
+const form = document.querySelector('.add__user__form');
+
 showForm.addEventListener('click', function(){
     addUserForm.classList.toggle('active')
 })
@@ -48,3 +50,36 @@ function getUser(){
 window.addEventListener('DOMContentLoaded', function(){
     getUser();
 })
+
+//SOUMISSION DU FORMULAIRE
+
+function addUser(e){
+    e.preventDefault();
+    let data = new FormData(this)
+    fetch('php/addUser.php', {
+        method: 'POST',
+        body: data
+    })
+    .then(response => {
+        if(response.ok){
+            return response.json();
+        }
+    })
+    .then(data => {
+        if(data.success != null){
+            alert(data.success)
+            form.querySelectorAll('input').forEach(input => {
+                input.value = '';
+            })
+            addUserForm.classList.remove('active')
+            table.innerHTML = '';
+            getUser();
+        }else{
+            alert(data.error)
+        }
+
+    })
+}
+
+form.addEventListener('submit', addUser);
+
