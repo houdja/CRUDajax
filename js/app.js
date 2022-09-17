@@ -15,7 +15,7 @@ function createRow(j){
     <div class="cell">${j.first_name}</div>
     <div class="cell">${j.last_name}</div>
     <div class="cell">${j.email}</div>
-    <div class="cell edit">Edit</div>
+    <div class="cell edit"><a href='edit__user.php?userId=${j.id}'>Edit</a></div>
     <div class="cell delete">Delete</div>
     `;
 
