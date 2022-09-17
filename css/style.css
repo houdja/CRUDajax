@@ -42,12 +42,16 @@ body{
     color: rgba(0, 0, 0, .8);
 }
 
+.user_info .cell{
+    text-align: center;
+}
+
 .edit,
 .delete{
     cursor: pointer;
 }
 
-.edit{
+.edit a{
     color: green;
 }
 
@@ -96,36 +100,49 @@ body{
     backdrop-filter: blur(2px);
 }
 
-.add__user__form{
+.add__user__form,
+.edit__form{
     position: relative;
     z-index: 2;
     width: 50%;
     height: 100%;
     background-color: #ffffff;
-    padding: 100px 50px 0;
+    padding: 100px 50px;
     display: flex;
     flex-direction: column;
     margin-left: auto;
 }
 
-.add__user__form h1{
+.add__user__form h1,
+.edit__form h1{
     text-transform: uppercase;
     font-size: 25px;
     font-weight: 400;
 }
 
 .add__user__form input,
-.add__user__form button{
+.add__user__form button,
+.edit__form input,
+.edit__form button{
     width: 300px;
     padding: 7.5px 10px;
     outline: none;
 }
 
 .add__user__form input,
-.add__user__form h1{
+.add__user__form h1,
+.edit__form input,
+.edit__form h1{
     margin-bottom: 30px;
 }
 
-.add__user__form button{
+.add__user__form button,
+.edit__form button{
     cursor: pointer;
+}
+
+.edit__form{
+    margin-left: unset;
+    width: 100%;
+    align-items: center;
 }
