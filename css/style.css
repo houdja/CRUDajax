@@ -46,10 +46,6 @@ body{
     text-align: center;
 }
 
-.edit,
-.delete{
-    cursor: pointer;
-}
 
 .edit a{
     color: green;
