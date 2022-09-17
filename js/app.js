@@ -16,10 +16,36 @@ function createRow(j){
     <div class="cell">${j.last_name}</div>
     <div class="cell">${j.email}</div>
     <div class="cell edit"><a href='edit__user.php?userId=${j.id}'>Edit</a></div>
-    <div class="cell delete">Delete</div>
+    <div class="cell delete"><a href='index.html?userId=${j.id}'>Delete</a></div>
     `;
 
     table.appendChild(row)
+}
+
+//DELETE USER
+
+function deleteUser(e){
+    e.preventDefault();
+    //envoie de l'id
+    let id = e.target.href.split('=')[1];
+    console.log(id);
+    fetch('php/deleteUser.php?userId=' + id, {
+        method: 'GET'
+    })
+    .then(response => {
+        if(response.ok){
+            return response.json();
+        }
+    })
+    .then(data => {
+        if(data.success){
+            alert(data.msg)
+            table.innerHTML = '';
+            getUser();
+        }else{
+            alert(data.msg)
+        }
+    })
 }
 
 function getUser(){
@@ -38,6 +64,11 @@ function getUser(){
                 data.forEach(d => {
                     createRow(d)
                 });
+                //SUPPRESSION D'UTILISATEUR
+                const deletes = document.querySelectorAll('.user_info .delete a');
+                deletes.forEach(btn => {
+                    btn.addEventListener('click', deleteUser);
+                })
             }else{
                 let p = document.createElement('p')
                 p.style.padding = '10px 0';
@@ -82,4 +113,5 @@ function addUser(e){
 }
 
 form.addEventListener('submit', addUser);
+
 
